@@ -15,12 +15,12 @@ public class MyAgent extends BasicMarioAIAgent implements Agent
 		reset();
 	}
 
-	// Does (row, col) contain an enemy?   
+	// Does (row, col) contain an enemy?
 	public boolean hasEnemy(int row, int col) {
 		return enemies[row][col] != 0;
 	}
 
-	// Is (row, col) empty?   
+	// Is (row, col) empty?
 	public boolean isEmpty(int row, int col) {
 		return (levelScene[row][col] == 0);
 	}
@@ -52,31 +52,34 @@ public class MyAgent extends BasicMarioAIAgent implements Agent
 	// Actually perform an action by setting a slot in the action array to be true
 	public boolean[] getAction()
 	{
+		//running and jumping seems to be the best way to get past level 0
+		//after level 0 everything I tried could not pass
       int x=9;
       int y=9;
       boolean run= true;
 		//action[Mario.KEY_SPEED] = action[Mario.KEY_JUMP] = isMarioAbleToJump || !isMarioOnGround;
-      for (int i=1; i<=9; i+=1){
-      if (hasEnemy(x,y+i) || !isEmpty(x,y+i) || !isEmpty(x,y+1))
-      {
-         //action[Mario.KEY_RIGHT] = false;
-         System.out.println("Next Block has Enemy");
-         //action[Mario.KEY_SPEED] = action[Mario.KEY_JUMP] = isMarioAbleToJump || !isMarioOnGround;
-          action[Mario.KEY_SPEED] = action[Mario.KEY_JUMP] = isMarioAbleToJump;
-       // action[Mario.KEY_RIGHT] = false;
-       // action[Mario.KEY_LEFT] = true;
+      // for (int i=1; i<=9; i+=1){
+      // if (hasEnemy(x,y+i) || !isEmpty(x,y+i) || !isEmpty(x,y+1))
+      // {
+      //    //action[Mario.KEY_RIGHT] = false;
+      //    System.out.println("Next Block has Enemy");
+				 action[Mario.KEY_SPEED] = action[Mario.KEY_JUMP] = isMarioAbleToJump || !isMarioOnGround;
+				 action[Mario.KEY_RIGHT] = true;
+      //   //  action[Mario.KEY_SPEED] = action[Mario.KEY_JUMP] = isMarioAbleToJump;
+      //  // action[Mario.KEY_RIGHT] = false;
+      //  // action[Mario.KEY_LEFT] = true;
+			//
+      // }//end of if
+      // else {
+      //         action[Mario.KEY_LEFT] = false;
+      //       action[Mario.KEY_RIGHT] = true;
+			//
+			//
+      // }
+			//
+      //  }//end of for loop
 
-      }//end of if
-      else {
-              action[Mario.KEY_LEFT] = false;
-            action[Mario.KEY_RIGHT] = true;
 
-      
-      }
-
-       }//end of for loop
-  
-    
       printObservation();
 		return action;
 	}
